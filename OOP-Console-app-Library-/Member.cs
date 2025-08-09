@@ -6,50 +6,50 @@ using System.Threading.Tasks;
 
 namespace OOP_Console_app_Library_
 {
-    internal class Member
-    {
-           public int Id;
-          public static int IDcount = 0;
-          public string Name;
-          //public List<string> Names;
-          //Names.remove(Name[i]);
-          public Book[] _borrowedBooks;
+     internal class Member
+ {
+     public int Id;
+     public static int IDcount = 0;
+     public string Name;
+     //public List<string> Names;
+     //Names.remove(Name[i]);
+     public int _borrowedBooks;
 
-  public Member(string name)
-  {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-          Console.WriteLine("Name cannot be empty.");
-      }
-      else
-      {
-          Name = name;
-      }
-      Id = IDcount++;
-      _borrowedBooks =  new Book[0];
-  }
+     public Member(string name)
+     {
+         if (string.IsNullOrWhiteSpace(name))
+         {
+             Console.WriteLine("Name cannot be empty.");
+         }
+         else
+         {
+             Name = name;
+         }
+         Id = IDcount++;
+         _borrowedBooks = 0;
+     }
 
-  public void removeMember(Member _Member)
-  {
-      for (int i = 0; i < IDcount; i++)
-      {
-          if (_borrowedBooks == 0 && _Member.Id == Id)
-          {
-              Console.WriteLine("Member found."); 
-          }
-          else
-          {
-              Console.WriteLine("Cannot remove member with borrowed books.");
-          }
-      }
+     public void removeMember(Member _Member)
+     {
+         for (int i = 0; i < IDcount; i++)
+         {
+             if (_borrowedBooks == 0 && _Member.Id == Id)
+             {
+                 Console.WriteLine("Member found.");
+             }
+             else
+             {
+                 Console.WriteLine("Cannot remove member with borrowed books.");
+             }
+         }
 
-  }
-  public void DisplayMember()
-  {
-      for (int i = 0; i < IDcount; i++)
-      {
-          Console.WriteLine($"Member Name:{Name} and his Id: {Id}");
-      }
-  }
-    }
+     }
+     public void DisplayMember()
+     {
+         for (int i = 0; i < IDcount; i++)
+         {
+             Console.WriteLine($"Member Name:{Name} and his Id: {Id}");
+         }
+     }
+ }
 }
