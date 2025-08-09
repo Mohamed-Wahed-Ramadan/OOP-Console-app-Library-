@@ -51,5 +51,40 @@ namespace OOP_Console_app_Library_
              Console.WriteLine($"Member Name:{Name} and his Id: {Id}");
          }
      }
+          
+        public void AddBorrowedBook(Book book)
+        {
+            Book[] newArray = new Book[_borrowedBooks.Length + 1];
+            for (int i = 0; i < _borrowedBooks.Length; i++)
+            {
+                newArray[i] = _borrowedBooks[i];
+            }
+            newArray[newArray.Length - 1] = book;
+            _borrowedBooks = newArray;
+        }
+
+        public void RemoveBorrowedBook(string bookId)
+        {
+            int count = 0;
+            for (int i = 0; i < _borrowedBooks.Length; i++)
+            {
+                if (_borrowedBooks[i].ID != bookId)
+                {
+                    count++;
+                }
+            }
+
+            Book[] newArray = new Book[count];
+            int index = 0;
+            for (int i = 0; i < _borrowedBooks.Length; i++)
+            {
+                if (_borrowedBooks[i].ID != bookId)
+                {
+                    newArray[index] = _borrowedBooks[i];
+                    index++;
+                }
+            }
+            _borrowedBooks = newArray;
+        }
  }
 }
