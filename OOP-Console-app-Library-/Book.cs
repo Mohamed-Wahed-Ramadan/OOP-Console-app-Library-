@@ -11,7 +11,7 @@ namespace OOP_Console_app_Library_
          public string ID;
  public string Title;
  public string Author;
- private bool Availability;
+ public bool Availability;
  
 
  
