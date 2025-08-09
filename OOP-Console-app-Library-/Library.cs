@@ -20,8 +20,8 @@ public void AddBook(Book book)
         {
             Console.WriteLine($"The book with the name {book.Title} is already exist");
         }
-        Books.Add(book);
     }
+        Books.Add(book);
 }
 
 public void RemoveBook(Book book)
