@@ -10,6 +10,48 @@ namespace OOP_Console_app_Library_
     {
         public List<Book> Books;
 
+        public void AddMember(Member member)
+{
+    for (int i = 0; i < Members.Count; i++)
+    {
+        if (Members[i].Name == member.Name)
+        {
+            Console.WriteLine($"The Member with the name {member.Name} is already exist");
+            return;
+        }
+    }
+    Members.Add(member);
+}
+public void RemoveMember(Member member)
+{
+    for (int i = 0; i < Members.Count; i++)
+    {
+        if (Members[i].Name == member.Name && BorrowBook== 0)
+        {
+            Members.Remove(Members[i]);
+            Console.WriteLine($"The Member with the name {member.Name} is removed");
+            return;
+        }
+        if (BorrowBook != 0)
+        {
+            nsole.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
+        }
+
+        Console.WriteLine($"The Member with the name {member.Name} is not found");
+    }
+
+     public void DisplayMember()
+     {
+         if (IDcount == 0)
+         {
+                Console.WriteLine("No members found.");
+                return;
+         }
+         for (int i = 0; i < IDcount; i++)
+         {
+               Console.WriteLine($"Member Name:{name[i]} and his Id: {Id[i]} NumberofBooksBorrowed: {BorrowedBooks[i]}");
+         }
+     }
 
 
 public void AddBook(Book book)
