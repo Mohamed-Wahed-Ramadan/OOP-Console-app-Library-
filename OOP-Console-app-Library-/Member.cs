@@ -28,29 +28,6 @@ namespace OOP_Console_app_Library_
          Id = IDcount++;
          _borrowedBooks = 0;
      }
-
-     public void removeMember(Member _Member)
-     {
-         for (int i = 0; i < IDcount; i++)
-         {
-             if (_borrowedBooks == 0 && _Member.Id == Id)
-             {
-                 Console.WriteLine("Member found.");
-             }
-             else
-             {
-                 Console.WriteLine("Cannot remove member with borrowed books.");
-             }
-         }
-
-     }
-     public void DisplayMember()
-     {
-         for (int i = 0; i < IDcount; i++)
-         {
-             Console.WriteLine($"Member Name:{Name} and his Id: {Id}");
-         }
-     }
           
         public void AddBorrowedBook(Book book)
         {
