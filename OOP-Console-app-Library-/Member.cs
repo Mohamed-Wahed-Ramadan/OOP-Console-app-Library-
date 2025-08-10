@@ -35,40 +35,27 @@ public Member(string name)
     Id = IDcount++;
     BorrowedBooks = 0;
 }
-          
-        public void AddBorrowedBook(Book book)
-        {
-            Book[] newArray = new Book[_borrowedBooks.Length + 1];
-            for (int i = 0; i < _borrowedBooks.Length; i++)
-            {
-                newArray[i] = _borrowedBooks[i];
-            }
-            newArray[newArray.Length - 1] = book;
-            _borrowedBooks = newArray;
-        }
+     public List<Book> _BorrowedBooks = new List<Book>();
 
-        public void RemoveBorrowedBook(string bookId)
-        {
-            int count = 0;
-            for (int i = 0; i < _borrowedBooks.Length; i++)
-            {
-                if (_borrowedBooks[i].ID != bookId)
-                {
-                    count++;
-                }
-            }
+     public void AddBorrowedBook(Book book)
+      {
+          _BorrowedBooks.Add(book);
+          BorrowedBooks = _BorrowedBooks.Count;
+      }
 
-            Book[] newArray = new Book[count];
-            int index = 0;
-            for (int i = 0; i < _borrowedBooks.Length; i++)
-            {
-                if (_borrowedBooks[i].ID != bookId)
-                {
-                    newArray[index] = _borrowedBooks[i];
-                    index++;
-                }
-            }
-            _borrowedBooks = newArray;
-        }
- }
+      public void RemoveBorrowedBook(string bookId)
+      {
+          List<Book> newList = new List<Book>();
+          for (int i = 0; i < _BorrowedBooks.Count; i++)
+          {
+              if (_BorrowedBooks[i].ID != bookId)
+              {
+                  newList.Add(_BorrowedBooks[i]);
+
+              }
+          }
+          _BorrowedBooks = newList;
+          BorrowedBooks = _BorrowedBooks.Count;
+      }
+    }
 }
