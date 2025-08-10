@@ -82,17 +82,18 @@ public void RemoveBook(Book book)
 
 public void GetBooks()
 {
-    if(Book.Count == 0)
-    {
-        Console.WriteLine("There is No Book at the moment!")
-        }
-    else{
-            foreach (Book book in Books)
+            if (Book.Count == 0)
             {
-                Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}");
+                Console.WriteLine("There is No Book at the moment!")
+                }
+            else
+            {
+                foreach (Book book in Books)
+                {
+                    Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}");
+                }
             }
         }
-}
 
          public void Display_available_borrowed_books()
  {
