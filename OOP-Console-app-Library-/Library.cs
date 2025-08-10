@@ -9,50 +9,52 @@ namespace OOP_Console_app_Library_
     internal class Library
     {
         public List<Book> Books;
+        public List<Member> Members;
 
-        public void AddMember(Member member)
+        
+        public void AddMember(Member Member)
 {
     for (int i = 0; i < Members.Count; i++)
     {
-        if (Members[i].Name == member.Name)
+        if (Members[i].Name == Member.Name)
         {
-            Console.WriteLine($"The Member with the name {member.Name} is already exist");
+            Console.WriteLine($"The Member with the name {Member.Name} is already exist");
             return;
         }
     }
-    Members.Add(member);
+    Members.Add(Member);
 }
-public void RemoveMember(Member member)
-{
-    for (int i = 0; i < Members.Count; i++)
-    {
-        if (Members[i].Name == member.Name && BorrowBook== 0)
+        public void RemoveMember(Member member)
         {
-            Members.Remove(Members[i]);
-            Console.WriteLine($"The Member with the name {member.Name} is removed");
-            return;
-        }
-        if (BorrowBook != 0)
-        {
-            nsole.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
-        }
+            for (int i = 0; i < Members.Count; i++)
+            {
+                if (Members[i].Name == member.Name && member.BorrowedBooks == 0)
+                {
+                    Members.Remove(Members[i]);
+                    Console.WriteLine($"The Member with the name {member.Name} is removed");
+                    return;
+                }
+                if (member.BorrowedBooks != 0)
+                {
+                    Console.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
+                }
 
-        Console.WriteLine($"The Member with the name {member.Name} is not found");
-    }
+                Console.WriteLine($"The Member with the name {member.Name} is not found");
+            }
+        }
 
      public void DisplayMember()
      {
-         if (IDcount == 0)
+         if (Member.IDcount == 0)
          {
                 Console.WriteLine("No members found.");
                 return;
          }
-         for (int i = 0; i < IDcount; i++)
+         for (int i = 0; i < Member.IDcount; i++)
          {
-               Console.WriteLine($"Member Name:{name[i]} and his Id: {Id[i]} NumberofBooksBorrowed: {BorrowedBooks[i]}");
+               Console.WriteLine($"Member Name:{Members[i].Name} and his Id: {Members[i].Id} NumberofBooksBorrowed: {Members[i].BorrowedBooks}");
          }
      }
-
 
 public void AddBook(Book book)
 {
