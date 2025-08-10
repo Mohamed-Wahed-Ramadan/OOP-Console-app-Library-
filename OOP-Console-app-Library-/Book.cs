@@ -8,59 +8,67 @@ namespace OOP_Console_app_Library_
 {
     internal class Book
     {
-         public string ID;
- public string Title;
- public string Author;
- public bool Availability;
- 
+        public string ID;
+        public string Title;
+        public string Author;
+        public bool Availability;
 
- 
 
- public Book(string id, string title, string author)
- {
-     if(ValidateID(id))
-         ID = id;
 
-     if(ValidateAuthor(author))
-        Author = author;
 
-     if (ValidateTitle(title))
-        Title = title;
-     
- }
+        public Book(string id, string title, string author)
+        {
+            if (ValidateID(id))
+                ID = id;
+            else throw new ArgumentException("Invalid Id");
 
- public bool ValidateTitle(string title)
- {
-     if(string.IsNullOrWhiteSpace(title))
-     {
-         Console.WriteLine("Can't Create A Book Without a Title");
-         return false;
-     }
-     return true;
- }
- public bool ValidateAuthor(string author)
- {
-     if (string.IsNullOrWhiteSpace(author))
-     {
-         Console.WriteLine("Can't Create A Book Without a Author");
-         return false;
-     }
-     return true;
- }
- public bool ValidateID(string ID)
- {
-     if (string.IsNullOrWhiteSpace(ID) && (ID.Length == 10 || ID.Length == 13))
-     {
-         for (int i  = 0;  i < ID.Length; i++)
-         {
-             if (!char.IsDigit(ID[i]))
-             {
-                 Console.WriteLine("ID has to be only Numbers");
-             }
-         }
-         return true;
-     }
-     return false;
- }
+            if (ValidateAuthor(author))
+                Author = author;
+            else throw new ArgumentException("Invalid Author Input");
+
+            if (ValidateTitle(title))
+                Title = title;
+            else throw new ArgumentException("Invalid Title Input");
+
+            Availability = true;
+        }
+
+        public bool ValidateTitle(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+
+                return false;
+            }
+            return true;
+        }
+        public bool ValidateAuthor(string author)
+        {
+            if (string.IsNullOrWhiteSpace(author))
+            {
+
+                return false;
+            }
+            return true;
+        }
+        public bool ValidateID(string ID)
+        {
+            if (!string.IsNullOrWhiteSpace(ID) && (ID.Length == 10 || ID.Length == 13))
+            {
+                for (int i = 0; i < ID.Length; i++)
+                {
+                    if (!char.IsDigit(ID[i]))
+                    {
+                        return false;
+
+
+                    }
+
+                }
+                return true;
+            }
+            return false;
+        }
+    
     }
 }
