@@ -15,6 +15,10 @@ namespace OOP_Console_app_Library_
      //Names.remove(Name[i]);
      public int _borrowedBooks;
 
+             public Member()
+             {
+       
+             }
      public Member(string name)
      {
          if (string.IsNullOrWhiteSpace(name))
