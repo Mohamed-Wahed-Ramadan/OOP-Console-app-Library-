@@ -8,30 +8,33 @@ namespace OOP_Console_app_Library_
 {
      internal class Member
  {
-     public int Id;
-     public static int IDcount = 0;
-     public string Name;
-     //public List<string> Names;
-     //Names.remove(Name[i]);
-     public int _borrowedBooks;
+    public int Id;
+public static int IDcount = 0;
+public string Name;
+//public List<string> Names;
+//Names.remove(Name[i]);
+public int BorrowedBooks;
 
-             public Member()
-             {
-       
-             }
-     public Member(string name)
-     {
-         if (string.IsNullOrWhiteSpace(name))
-         {
-             Console.WriteLine("Name cannot be empty.");
-         }
-         else
-         {
-             Name = name;
-         }
-         Id = IDcount++;
-         _borrowedBooks = 0;
-     }
+
+public Member()
+{
+    
+}
+
+
+public Member(string name)
+{
+    if (string.IsNullOrWhiteSpace(name))
+    {
+        Console.WriteLine("Name cannot be empty.");
+    }
+    else
+    {
+        Name = name;
+    }
+    Id = IDcount++;
+    BorrowedBooks = 0;
+}
           
         public void AddBorrowedBook(Book book)
         {
