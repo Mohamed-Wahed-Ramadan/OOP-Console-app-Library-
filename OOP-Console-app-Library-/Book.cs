@@ -14,7 +14,10 @@ namespace OOP_Console_app_Library_
         public bool Availability;
 
 
-
+        public Book ()
+        {
+            
+        }
 
         public Book(string id, string title, string author)
         {
