@@ -9,8 +9,52 @@ namespace OOP_Console_app_Library_
     internal class Library
     {
         public List<Book> Books;
+        public List<Member> Members;
 
+        
+        public void AddMember(Member Member)
+{
+    for (int i = 0; i < Members.Count; i++)
+    {
+        if (Members[i].Name == Member.Name)
+        {
+            Console.WriteLine($"The Member with the name {Member.Name} is already exist");
+            return;
+        }
+    }
+    Members.Add(Member);
+}
+        public void RemoveMember(Member member)
+        {
+            for (int i = 0; i < Members.Count; i++)
+            {
+                if (Members[i].Name == member.Name && member.BorrowedBooks == 0)
+                {
+                    Members.Remove(Members[i]);
+                    Console.WriteLine($"The Member with the name {member.Name} is removed");
+                    return;
+                }
+                if (member.BorrowedBooks != 0)
+                {
+                    Console.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
+                }
 
+                Console.WriteLine($"The Member with the name {member.Name} is not found");
+            }
+        }
+
+     public void DisplayMember()
+     {
+         if (Member.IDcount == 0)
+         {
+                Console.WriteLine("No members found.");
+                return;
+         }
+         for (int i = 0; i < Member.IDcount; i++)
+         {
+               Console.WriteLine($"Member Name:{Members[i].Name} and his Id: {Members[i].Id} NumberofBooksBorrowed: {Members[i].BorrowedBooks}");
+         }
+     }
 
 public void AddBook(Book book)
 {
@@ -58,7 +102,7 @@ public void GetBooks()
                 Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}, Availability: {(book.Availability ? "Yes" : "No")}");
             }
         }
-}
+
 
          public void Display_available_borrowed_books()
  {

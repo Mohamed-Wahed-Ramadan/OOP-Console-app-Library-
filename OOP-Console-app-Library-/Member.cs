@@ -8,83 +8,59 @@ namespace OOP_Console_app_Library_
 {
      internal class Member
  {
-     public int Id;
-     public static int IDcount = 0;
-     public string Name;
-     //public List<string> Names;
-     //Names.remove(Name[i]);
-     public int _borrowedBooks;
+    public int Id;
+public static int IDcount = 0;
+public string Name;
+//public List<string> Names;
+//Names.remove(Name[i]);
+public int BorrowedBooks;
 
-     public Member(string name)
-     {
-         if (string.IsNullOrWhiteSpace(name))
-         {
-             Console.WriteLine("Name cannot be empty.");
-         }
-         else
-         {
-             Name = name;
-         }
-         Id = IDcount++;
-         _borrowedBooks = 0;
-     }
 
-     public void removeMember(Member _Member)
-     {
-         for (int i = 0; i < IDcount; i++)
-         {
-             if (_borrowedBooks == 0 && _Member.Id == Id)
-             {
-                 Console.WriteLine("Member found.");
-             }
-             else
-             {
-                 Console.WriteLine("Cannot remove member with borrowed books.");
-             }
-         }
+public Member()
+{
+    
+}
 
-     }
-     public void DisplayMember()
-     {
-         for (int i = 0; i < IDcount; i++)
-         {
-             Console.WriteLine($"Member Name:{Name} and his Id: {Id}");
-         }
-     }
-          
-        public void AddBorrowedBook(Book book)
-        {
-            Book[] newArray = new Book[_borrowedBooks.Length + 1];
-            for (int i = 0; i < _borrowedBooks.Length; i++)
+
+            public Member(string Name)
             {
-                newArray[i] = _borrowedBooks[i];
+                if (ValidateName(Name))
+                this.Name = Name;
+                Id = IDcount++;
+                BorrowedBooks = 0;
             }
-            newArray[newArray.Length - 1] = book;
-            _borrowedBooks = newArray;
+
+        public bool ValidateName(string Name)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Console.WriteLine("Name Is Not Valid");
+                return false;
+            }
+            return true;
         }
 
-        public void RemoveBorrowedBook(string bookId)
-        {
-            int count = 0;
-            for (int i = 0; i < _borrowedBooks.Length; i++)
-            {
-                if (_borrowedBooks[i].ID != bookId)
-                {
-                    count++;
-                }
-            }
+     public List<Book> _BorrowedBooks = new List<Book>();
 
-            Book[] newArray = new Book[count];
-            int index = 0;
-            for (int i = 0; i < _borrowedBooks.Length; i++)
-            {
-                if (_borrowedBooks[i].ID != bookId)
-                {
-                    newArray[index] = _borrowedBooks[i];
-                    index++;
-                }
-            }
-            _borrowedBooks = newArray;
-        }
- }
+     public void AddBorrowedBook(Book book)
+      {
+          _BorrowedBooks.Add(book);
+          BorrowedBooks = _BorrowedBooks.Count;
+      }
+
+      public void RemoveBorrowedBook(string bookId)
+      {
+          List<Book> newList = new List<Book>();
+          for (int i = 0; i < _BorrowedBooks.Count; i++)
+          {
+              if (_BorrowedBooks[i].ID != bookId)
+              {
+                  newList.Add(_BorrowedBooks[i]);
+
+              }
+          }
+          _BorrowedBooks = newList;
+          BorrowedBooks = _BorrowedBooks.Count;
+      }
+    }
 }
