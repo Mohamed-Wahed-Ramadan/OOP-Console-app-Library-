@@ -19,6 +19,7 @@ public void AddBook(Book book)
         if(Books[i].Title == book.Title)
         {
             Console.WriteLine($"The book with the name {book.Title} is already exist");
+            return;
         }
     }
         Books.Add(book);
@@ -26,11 +27,19 @@ public void AddBook(Book book)
 
 public void RemoveBook(Book book)
 {
-    for (int i = 0;i < Books.Count;i++)
+    if (!book.Availability)
     {
-        if (Books[i].Title == book.Title)
+        Console.WriteLine("Can't Remove a book while it's borrowed");
+    }
+    else
+    {
+        for (int i = 0; i < Books.Count; i++)
         {
-            Books.Remove(Books[i]);
+            if (Books[i].Title == book.Title)
+            {
+                Books.RemoveAt(i);
+                return;
+            }
         }
         Console.WriteLine($"The Book with the name {book.Title} Maybe removed already");
     }
@@ -40,12 +49,13 @@ public void GetBooks()
 {
     if(Book.Count == 0)
     {
-        Console.WriteLine("There is No Book at the moment!")
+        Console.WriteLine("No Books to be Printed!")
+            return;
         }
     else{
             foreach (Book book in Books)
             {
-                Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}");
+                Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}, Availability: {(book.Availability ? "Yes" : "No")}");
             }
         }
 }
