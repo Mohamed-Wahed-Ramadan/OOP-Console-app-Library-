@@ -22,19 +22,24 @@ public Member()
 }
 
 
-public Member(string name)
-{
-    if (string.IsNullOrWhiteSpace(name))
-    {
-        Console.WriteLine("Name cannot be empty.");
-    }
-    else
-    {
-        Name = name;
-    }
-    Id = IDcount++;
-    BorrowedBooks = 0;
-}
+            public Member(string Name)
+            {
+                if (ValidateName(Name))
+                this.Name = Name;
+                Id = IDcount++;
+                BorrowedBooks = 0;
+            }
+
+        public bool ValidateName(string Name)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                Console.WriteLine("Name Is Not Valid");
+                return false;
+            }
+            return true;
+        }
+
      public List<Book> _BorrowedBooks = new List<Book>();
 
      public void AddBorrowedBook(Book book)
