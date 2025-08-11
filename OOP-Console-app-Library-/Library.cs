@@ -82,9 +82,9 @@ public void RemoveBook(Book book)
 
 public void GetBooks()
 {
-            if (Book.Count == 0)
+            if (Books.Count == 0)
             {
-                Console.WriteLine("There is No Book at the moment!")
+                Console.WriteLine("There is No Book at the moment!") ;
                 }
             else
             {
