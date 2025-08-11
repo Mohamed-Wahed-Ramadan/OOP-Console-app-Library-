@@ -47,9 +47,9 @@ public void RemoveBook(Book book)
 
 public void GetBooks()
 {
-    if(Book.Count == 0)
+    if(Books.Count == 0)
     {
-        Console.WriteLine("No Books to be Printed!")
+        Console.WriteLine("No Books to be Printed!");
             return;
         }
     else{
