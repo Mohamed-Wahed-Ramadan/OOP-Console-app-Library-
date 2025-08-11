@@ -36,35 +36,47 @@ namespace OOP_Console_app_Library_
             Availability = true;
         }
 
-        public bool ValidateTitle(string title)
+         public bool ValidateTitle(string title)
         {
+            // 1. لازم العنوان ما يكونش فاضي أو مسافات بس
             if (string.IsNullOrWhiteSpace(title))
-            {
-
                 return false;
+
+            // 2. لازم كل الحروف تكون إما حروف أو مسافات
+            foreach (char c in title)
+            {
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
+                    return false;
             }
-            return true;
+
+            return true; // لو عدت الشروط يبقى صالح
         }
+
         public bool ValidateAuthor(string author)
         {
+            // 1. لازم اسم المؤلف ما يكونش فاضي أو مسافات بس
             if (string.IsNullOrWhiteSpace(author))
-            {
-
                 return false;
+
+            // 2. لازم كل الحروف تكون إما حروف أو مسافات
+            foreach (char c in author)
+            {
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
+                    return false;
             }
-            return true;
+
+            return true; // لو عدت الشروط يبقى صالح
         }
+
         public bool ValidateID(string ID)
         {
-            if (!string.IsNullOrWhiteSpace(ID) && (ID.Length == 10 || ID.Length == 13))
+            if (!string.IsNullOrWhiteSpace(ID) ) 
             {
                 for (int i = 0; i < ID.Length; i++)
                 {
                     if (!char.IsDigit(ID[i]))
                     {
                         return false;
-
-
                     }
 
                 }

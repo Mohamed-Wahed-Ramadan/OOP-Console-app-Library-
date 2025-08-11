@@ -9,7 +9,7 @@ namespace OOP_Console_app_Library_
      internal class Member
  {
     public int Id;
-public static int IDcount = 0;
+public static int IDcount = 1;
 public string Name;
 //public List<string> Names;
 //Names.remove(Name[i]);
@@ -20,12 +20,12 @@ public Member()
 {
     
 }
-
-
             public Member(string Name)
             {
                 if (ValidateName(Name))
-                this.Name = Name;
+                    this.Name = Name;
+            else throw new ArgumentException("Invalid Name");
+
                 Id = IDcount++;
                 BorrowedBooks = 0;
             }
@@ -34,13 +34,19 @@ public Member()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                Console.WriteLine("Name Is Not Valid");
                 return false;
+            }
+            foreach (char c in Name)
+            {
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
+                    return false;
             }
             return true;
         }
 
-     public List<Book> _BorrowedBooks = new List<Book>();
+      
+
+        public List<Book> _BorrowedBooks = new List<Book>();
 
      public void AddBorrowedBook(Book book)
       {

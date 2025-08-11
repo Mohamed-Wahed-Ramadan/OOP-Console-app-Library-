@@ -1,6 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using OOP_Console_app_Library_;
+
+Library library1 = new Library();
+
+
 string[] menuOptions = {
             "Add Book",
             "Remove Book",
@@ -75,57 +80,114 @@ do
                 string addTitle = Console.ReadLine();
                 Console.Write("Enter Author: ");
                 string addAuthor = Console.ReadLine();
-                Console.WriteLine($"Book '{addTitle}' added successfully.");
+
+                Book tempbook = new Book();
+                bool isValid = true;
+
+                if (!tempbook.ValidateID(addBookId))
+                {
+                    Console.WriteLine("Invalid ID");
+                    isValid = false;
+                }
+                if (!tempbook.ValidateTitle(addTitle))
+                {
+                    Console.WriteLine("Invalid Title");
+                    isValid = false;
+                }
+                if (!tempbook.ValidateAuthor(addAuthor))
+                {
+                    Console.WriteLine("Invalid Author");
+                    isValid = false;
+                }
+
+                if (isValid)
+                {
+                    Book newBook = new Book(addBookId, addTitle, addAuthor);
+                    if (library1.AddBook(newBook)) // لو رجعت true
+                    {
+                        Console.WriteLine($"Book '{addTitle}' added successfully.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid book details. Please try again.");
+                }
                 break;
 
             case 1: // Remove Book
                 Console.Write("Enter Book ID: ");
                 string removeBookId = Console.ReadLine();
-                Console.Write("Enter Title: ");
-                string removeTitle = Console.ReadLine();
-                Console.Write("Enter Author: ");
-                string removeAuthor = Console.ReadLine();
-                Console.WriteLine($"Book '{removeTitle}' removed successfully.");
+                Book bookToRemove = library1.FindBookById(removeBookId);   // hena hb3at al id 34an ageb al book  w ab3ato ll remove function
+
+                if (bookToRemove != null)
+                {
+                    library1.RemoveBook(bookToRemove);
+                    Console.WriteLine($"Book ID {bookToRemove.ID}.....Book title {bookToRemove.Title } removed successfully.");
+                }
                 break;
 
             case 2: // Add Member
-                Console.Write("Enter Member ID: ");
-                string addMemberId = Console.ReadLine();
+             
                 Console.Write("Enter Name: ");
                 string addMemberName = Console.ReadLine();
-                Console.WriteLine($"Member '{addMemberName}' added successfully.");
+
+                Member tempmember = new Member();
+                bool isMemberValid = true;
+
+                
+                if (tempmember.ValidateName(addMemberName))
+                {
+                    isMemberValid = true;
+                    Member newMember = new Member(addMemberName);
+                    library1.AddMember(newMember);
+                    Console.WriteLine($"Member '{addMemberName}' added successfully.");
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Name");
+                    isMemberValid = false;
+                }
                 break;
 
             case 3: // Remove Member
                 Console.Write("Enter Member ID: ");
-                string removeMemberId = Console.ReadLine();
-                Console.WriteLine($"Member 'Alice Smith' removed successfully.");
-                break;
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int removeMemberId))
+                {
+                    Member membertoremove = library1.FindMemberById(removeMemberId);
+                    if (membertoremove != null)
+                    {
+                        library1.RemoveMember(membertoremove);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid ID. Please enter a numeric value.");
+                }
+            
+               break;
 
             case 4: // Borrow Book
-                Console.Write("Enter Book ID: ");
-                string borrowBookId = Console.ReadLine();
-                Console.Write("Enter Member ID: ");
-                string borrowMemberId = Console.ReadLine();
-                Console.WriteLine("Book is not available.");
+
+                library1.BorrowBook();
                 break;
 
             case 5: // Return Book
-                Console.Write("Enter Book ID: ");
-                string returnBookId = Console.ReadLine();
-                Console.Write("Enter Member ID: ");
-                string returnMemberId = Console.ReadLine();
-                Console.WriteLine("Alice Smith returned 'The Great Gatsby'.");
+
+                library1.ReturnBook();
                 break;
 
             case 6: // List Books
                 Console.WriteLine("Books in Library:");
-                Console.WriteLine("ID: 1, Title: The Great Gatsby, Author: F. Scott Fitzgerald, Available: True");
-                Console.WriteLine("ID: 2, Title: 1984, Author: George Orwell, Available: True");
+                
+                library1.Display_available_borrowed_books();
                 break;
 
             case 7: // List Members
                 Console.WriteLine("Library Members:");
+
+                library1.DisplayMember();
                 break;
 
             case 8: // Exit
