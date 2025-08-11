@@ -96,159 +96,159 @@ public void GetBooks()
         }
 
          public void Display_available_borrowed_books()
- {
-     if (Books.Count == 0)
-     {
-         Console.WriteLine("There aren't found any book to display");
-         return;
-     }
-     int c = 0;
-     if(Books.Count > 0)
-     {
-         Console.WriteLine("all available book");
-         foreach (Book book in Books)
          {
-             if (book.Availability)
+             if (Books.Count == 0)
              {
-                 Console.WriteLine($"Name {book.Title}, With The ISBN of {book.ID} is available");
-                 c++;
+                 Console.WriteLine("There aren't found any book to display");
+                 return;
              }
-         }
-     }
+             int c = 0;
+             if(Books.Count > 0)
+             {
+                 Console.WriteLine("all available book");
+                 foreach (Book book in Books)
+                 {
+                     if (book.Availability)
+                     {
+                         Console.WriteLine($"Name {book.Title}, With The ISBN of {book.ID} is available");
+                         c++;
+                     }
+                 }
+             }
     
-     if(c < Books.Count)
-     {
-         Console.WriteLine("all borrowed book");
-         foreach (Book book in Books)
-         {
-             if (!book.Availability)
+             if(c < Books.Count)
              {
-                 Console.WriteLine($"Name {book.Title}, With The ISBN of {book.ID} is borrowed");
+                 Console.WriteLine("all borrowed book");
+                 foreach (Book book in Books)
+                 {
+                     if (!book.Availability)
+                     {
+                         Console.WriteLine($"Name {book.Title}, With The ISBN of {book.ID} is borrowed");
+                     }
+                 }
              }
          }
-     }
- }
- public void BorrowBook()
- {
-     Display_available_borrowed_books();
-
-     Console.Write("Enter Book ID: ");
-     string b_id = Console.ReadLine();
-
-     Console.Write("Enter Member ID: ");
-     int m_id;
-     if (!int.TryParse(Console.ReadLine(), out m_id))
-     {
-         Console.WriteLine("Member ID must be a valid number.");
-         return;
-     }
-
-     // Find the book
-     Book foundBook = null;
-     for (int i = 0; i < Books.Count; i++)
-     {
-         if (Books[i].ID == b_id)
+         public void BorrowBook()
          {
-             foundBook = Books[i];
-             break;
+             Display_available_borrowed_books();
+
+             Console.Write("Enter Book ID: ");
+             string b_id = Console.ReadLine();
+
+             Console.Write("Enter Member ID: ");
+             int m_id;
+             if (!int.TryParse(Console.ReadLine(), out m_id))
+             {
+                 Console.WriteLine("Member ID must be a valid number.");
+                 return;
+             }
+
+             // Find the book
+             Book foundBook = null;
+             for (int i = 0; i < Books.Count; i++)
+             {
+                 if (Books[i].ID == b_id)
+                 {
+                     foundBook = Books[i];
+                     break;
+                 }
+             }
+
+             if (foundBook == null)
+             {
+                 Console.WriteLine("Book not found.");
+                 return;
+             }
+
+             if (!foundBook.Availability)
+             {
+                 Console.WriteLine("Book is already borrowed.");
+                 return;
+             }
+
+             // Find the member
+             Member foundMember = null;
+             for (int i = 0; i < Members.Count; i++)
+             {
+                 if (Members[i].Id == m_id)
+                 {
+                     foundMember = Members[i];
+                     break;
+                 }
+             }
+
+             if (foundMember == null)
+             {
+                 Console.WriteLine("Member not found.");
+                 return;
+             }
+
+             // Borrow the book
+             foundBook.Availability = false;
+             foundMember.AddBorrowedBook(foundBook);
+             Console.WriteLine("Book borrowed successfully.");
          }
-     }
 
-     if (foundBook == null)
-     {
-         Console.WriteLine("Book not found.");
-         return;
-     }
 
-     if (!foundBook.Availability)
-     {
-         Console.WriteLine("Book is already borrowed.");
-         return;
-     }
-
-     // Find the member
-     Member foundMember = null;
-     for (int i = 0; i < Members.Count; i++)
-     {
-         if (Members[i].Id == m_id)
+         public void ReturnBook()
          {
-             foundMember = Members[i];
-             break;
+             Display_available_borrowed_books();
+
+             Console.Write("Enter Book ID: ");
+             string b_id = Console.ReadLine();
+
+             Console.Write("Enter Member ID: ");
+             int m_id;
+             if (!int.TryParse(Console.ReadLine(), out m_id))
+             {
+                 Console.WriteLine("Member ID must be a valid number.");
+                 return;
+             }
+
+             // Find the book
+             Book foundBook = null;
+             for (int i = 0; i < Books.Count; i++)
+             {
+                 if (Books[i].ID == b_id)
+                 {
+                     foundBook = Books[i];
+                     break;
+                 }
+             }
+
+             if (foundBook == null)
+             {
+                 Console.WriteLine("Book not found.");
+                 return;
+             }
+
+             if (foundBook.Availability)
+             {
+                 Console.WriteLine("Book is not borrowed.");
+                 return;
+             }
+
+             // Find the member
+             Member foundMember = null;
+             for (int i = 0; i < Members.Count; i++)
+             {
+                 if (Members[i].Id == m_id)
+                 {
+                     foundMember = Members[i];
+                     break;
+                 }
+             }
+
+             if (foundMember == null)
+             {
+                 Console.WriteLine("Member not found.");
+                 return;
+             }
+
+             // Return the book
+             foundBook.Availability = true;
+             foundMember.RemoveBorrowedBook(b_id);
+             Console.WriteLine("Book returned successfully.");
          }
-     }
-
-     if (foundMember == null)
-     {
-         Console.WriteLine("Member not found.");
-         return;
-     }
-
-     // Borrow the book
-     foundBook.Availability = false;
-     foundMember.AddBorrowedBook(foundBook);
-     Console.WriteLine("Book borrowed successfully.");
- }
-
-
- public void ReturnBook()
- {
-     Display_available_borrowed_books();
-
-     Console.Write("Enter Book ID: ");
-     string b_id = Console.ReadLine();
-
-     Console.Write("Enter Member ID: ");
-     int m_id;
-     if (!int.TryParse(Console.ReadLine(), out m_id))
-     {
-         Console.WriteLine("Member ID must be a valid number.");
-         return;
-     }
-
-     // Find the book
-     Book foundBook = null;
-     for (int i = 0; i < Books.Count; i++)
-     {
-         if (Books[i].ID == b_id)
-         {
-             foundBook = Books[i];
-             break;
-         }
-     }
-
-     if (foundBook == null)
-     {
-         Console.WriteLine("Book not found.");
-         return;
-     }
-
-     if (foundBook.Availability)
-     {
-         Console.WriteLine("Book is not borrowed.");
-         return;
-     }
-
-     // Find the member
-     Member foundMember = null;
-     for (int i = 0; i < Members.Count; i++)
-     {
-         if (Members[i].Id == m_id)
-         {
-             foundMember = Members[i];
-             break;
-         }
-     }
-
-     if (foundMember == null)
-     {
-         Console.WriteLine("Member not found.");
-         return;
-     }
-
-     // Return the book
-     foundBook.Availability = true;
-     foundMember.RemoveBorrowedBook(b_id);
-     Console.WriteLine("Book returned successfully.");
- }
     }
 }
