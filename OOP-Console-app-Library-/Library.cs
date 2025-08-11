@@ -102,7 +102,7 @@ public void GetBooks()
                 Console.WriteLine($"Name {book.Title}, and the Author is {book.Author} With The ISBN of {book.ID}, Availability: {(book.Availability ? "Yes" : "No")}");
             }
         }
-
+}
 
          public void Display_available_borrowed_books()
  {
