@@ -13,6 +13,8 @@ string[] menuOptions = {
             "Remove Member",
             "Borrow Book",
             "Return Book",
+            "Edit Book",
+            "Edit Member",
             "List Books",
             "List Members",
             "Exit"
@@ -185,19 +187,123 @@ do
                 library1.ReturnBook();
                 break;
 
-            case 6: // List Books
+           
+            case 6:       //      "Edit Book",
+
+                Console.WriteLine("edit book ");
+                Console.WriteLine("===================================================");
+                library1.Display_available_borrowed_books();
+                Console.WriteLine("===================================================");
+                Console.WriteLine("enter Id of book you want to edit  ");
+                string editbook = Console.ReadLine();
+                Book bookedit = library1.FindBookById(editbook);   // hena hb3at al id 34an ageb al book  w ab3ato ll remove function
+
+                if (bookedit != null)
+                {
+                    Console.Write("Enter Book ID: ");
+                    string editbookid = Console.ReadLine();
+                    Console.Write("Enter Title: ");
+                    string editbooktitle = Console.ReadLine();
+                    Console.Write("Enter Author: ");
+                    string editbookauthor = Console.ReadLine();
+
+                    Book tempbookedit = new Book();
+                    bool eidtisValid = true;
+
+                    if (!tempbookedit.ValidateID(editbookid))
+                    {
+                        Console.WriteLine("Invalid ID");
+                        eidtisValid = false;
+                    }
+                    if (!tempbookedit.ValidateTitle(editbooktitle))
+                    {
+                        Console.WriteLine("Invalid Title");
+                        eidtisValid = false;
+                    }
+                    if (!tempbookedit.ValidateAuthor(editbookauthor))
+                    {
+                        Console.WriteLine("Invalid Author");
+                        eidtisValid = false;
+                    }
+
+                    if (eidtisValid)
+                    {
+                        Book newBook = new Book(editbookid, editbooktitle, editbookauthor);
+                        if (library1.AddBook(newBook)) // لو رجعت true
+                        {
+                            library1.RemoveBook(bookedit);
+                            Console.WriteLine($"Book '{editbooktitle}' edited successfully.");
+                            Console.WriteLine("==================");
+                            Console.WriteLine("books after updated");
+                            library1.Display_available_borrowed_books();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid book details. Please try again.");
+                    }
+                }
+
+
+                break;
+            case 7:          //     "Edit member",
+                Console.WriteLine("edit member");
+                Console.WriteLine("==================================================");
+                library1.DisplayMember();
+                Console.WriteLine("==================================================");
+                Console.WriteLine("enter member id you want to edit ");
+                string editmember = Console.ReadLine();
+
+                if (int.TryParse(editmember, out int editMemberId))
+                {
+                    Member membertoedit = library1.FindMemberById(editMemberId);
+                    if (membertoedit != null)
+                    {
+                        library1.editMember(membertoedit);
+                        Console.Write("Enter new Name: ");
+                        string editMemberName = Console.ReadLine();
+
+                        Member tempmemberedit = new Member();
+                        bool isMembereditValid = true;
+
+
+                        if (tempmemberedit.ValidateName(editMemberName))
+                        {
+                            isMembereditValid = true;
+                            Member newMemberedit = new Member(editMemberName);
+                            library1.AddMember(newMemberedit);
+                            Console.WriteLine($"Member '{editMemberName}' edit successfully.");
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Name");
+                            isMemberValid = false;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid ID. Please enter a numeric value.");
+                }
+
+                
+
+                break;
+
+            case 8: // List Books
                 Console.WriteLine("Books in Library:");
                 
                 library1.Display_available_borrowed_books();
                 break;
 
-            case 7: // List Members
+            case 9: // List Members
                 Console.WriteLine("Library Members:");
 
                 library1.DisplayMember();
                 break;
 
-            case 8: // Exit
+            case 10: // Exit
                 Console.WriteLine("Goodbye!");
                 return;
 
