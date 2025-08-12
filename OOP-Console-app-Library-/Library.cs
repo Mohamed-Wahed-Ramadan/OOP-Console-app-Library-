@@ -60,9 +60,21 @@ namespace OOP_Console_app_Library_
             {
                 Console.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
             }
-
         }
 
+////////////////////////////////////////////////////////////////////
+        public void editMember(Member member)
+        {
+          if (member.BorrowedBooks == 0)
+            {
+                Members.Remove(member);
+            }
+            else
+            {
+                Console.WriteLine($"The Member with the name {member.Name} cannot be removed because they have borrowed books.");
+            }
+
+        }
     public void DisplayMember()
  {
      if (Members.Count == 0)
