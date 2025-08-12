@@ -115,6 +115,10 @@ do
                 break;
 
             case 1: // Remove Book
+
+                 library1.Display_available_borrowed_books();
+                Console.WriteLine("==============================================================================");     
+                                
                 Console.Write("Enter Book ID: ");
                 string removeBookId = Console.ReadLine();
                 Book bookToRemove = library1.FindBookById(removeBookId);   // hena hb3at al id 34an ageb al book  w ab3ato ll remove function
@@ -151,6 +155,9 @@ do
                 break;
 
             case 3: // Remove Member
+                library1.DisplayMember();
+                Console.WriteLine("==============================================================================");
+                                
                 Console.Write("Enter Member ID: ");
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out int removeMemberId))
