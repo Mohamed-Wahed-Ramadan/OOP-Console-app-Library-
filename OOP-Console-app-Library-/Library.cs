@@ -63,18 +63,18 @@ namespace OOP_Console_app_Library_
 
         }
 
-        public void DisplayMember()
+    public void DisplayMember()
+ {
+     if (Members.Count == 0)
      {
-         if (Member.IDcount == 1)
-         {
-                Console.WriteLine("No members found.");
-                return;
-         }
-         for (int i = 0; i < Member.IDcount-1; i++)
-         {
-               Console.WriteLine($"Member Name:{Members[i].Name} and his Id: {Members[i].Id} NumberofBooksBorrowed: {Members[i].BorrowedBooks}");
-         }
+         Console.WriteLine("No members found.");
+         return;
      }
+     for (int i = 0; i < Members.Count; i++)
+     {
+         Console.WriteLine($"Member Name:{Members[i].Name} and his Id: {Members[i].Id} NumberofBooksBorrowed: {Members[i].BorrowedBooks}");
+     }
+ }
 
         public bool AddBook(Book book)
         {
